@@ -66,11 +66,11 @@ $(function() {
 	    },
 	    messages: {
 	        username: {
-	            required: "Please enter username",
-	            email: "Please enter a valid email address"
+	            required: "Por favor, digite um usuário",
+	            email: "Por favor, digite um endereço de e-mail válido!"
 	        },
-	        password:  "Please enter password",
-	        agree: "Please accept our policy"
+	        password:  "Por favor, digite sua senha",
+	        agree: "Por favor, aceite nossos termos de compromisso"
 	    },
 	    invalidHandler: function() {
 			animate({
@@ -99,8 +99,8 @@ $(function() {
 	    },
 	    messages: {
 	        email1: {
-	            required: "Please enter email address",
-	            email: "Please enter a valid email address"
+	            required: "Por favor, digite um endereço de email",
+	            email: "Por favor, digite um endereço de email válido"
 	        }
 	    },
 	    invalidHandler: function() {
@@ -175,21 +175,21 @@ $(function() {
 			}
 		},
 	    messages: {
-	    	firstname: "Please enter firstname and lastname",
-	    	lastname: "Please enter firstname and lastname",
+	    	firstname: "Por favor, digite Nome e Sobrenome",
+	    	lastname: "Por favor, digite Nome e Sobrenome",
 	        email: {
-	            required: "Please enter email",
-	            email: "Please enter a valid email address"
+	            required: "Por favor, digite seu e-mail",
+	            email: "Por favor, digite um endereço de e-mail válido"
 	        },
 	        password: {
-	        	required: "Please enter password fields.",
-	        	minlength: "Passwords should be at least 8 characters."
+	        	required: "Por favor, preencha os campos de senha.",
+	        	minlength: "A senha deve conter no mínimo 8 carcteres."
 	        },
 	        retype_password: {
-	        	required: "Please enter password fields.",
-	        	minlength: "Passwords should be at least 8 characters."
+	        	required: "Por favor, preencha os campos de senha.",
+	        	minlength: "A senha deve conter no mínimo 8 carcteres."
 	        },
-	        agree: "Please accept our policy"
+	        agree: "Por favor, aceite nossos termos de compromisso"
 	    },
 	    invalidHandler: function() {
 			animate({

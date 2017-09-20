@@ -8,6 +8,7 @@ package com.mycompany.mavenproject1.services;
 import com.mycompany.mavenproject1.integrations.model.User;
 import com.mycompany.mavenproject1.integrations.repository.UserRepository;
 import com.mycompany.mavenproject1.services.common.GenericResponse;
+import com.mycompany.mavenproject1.services.user.beans.UserBean;
 import com.mycompany.mavenproject1.services.user.transform.UserTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,13 @@ public class LoginService {
 
     @RequestMapping(method = RequestMethod.POST, path = "/login", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> login(@RequestParam(value = "email", required = true) String email,
+    ResponseEntity<UserBean> login(@RequestParam(value = "email", required = true) String email,
             @RequestParam(value = "password", required = true) String password) {
-
-        GenericResponse response = new GenericResponse();
+//
+//        GenericResponse response = new GenericResponse();
         try {
             User user = userRepository.findByEmailUser(email);
+
             System.out.println(user);
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -47,9 +49,8 @@ public class LoginService {
             if (!user.getUserPassword().equals(password)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }
-
-            response.addContentItem(transform.entityToBean(user));
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            UserBean bean = (UserBean) transform.entityToBean(user);
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
         } catch (Exception ex) {
 //            log.error(logPrefix + "-[HTTP STATUS][" + HttpStatus.INTERNAL_SERVER_ERROR + "]-[ERROR][" + ex.getMessage() + "]", ex);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

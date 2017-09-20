@@ -8,6 +8,8 @@ package com.mycompany.mavenproject1.services.user;
 import com.mycompany.mavenproject1.integrations.model.User;
 import com.mycompany.mavenproject1.integrations.repository.UserRepository;
 import com.mycompany.mavenproject1.services.common.GenericResponse;
+import com.mycompany.mavenproject1.services.common.GenericServiceBean;
+import com.mycompany.mavenproject1.services.user.beans.UserBean;
 import com.mycompany.mavenproject1.services.user.transform.UserTransform;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,24 +37,25 @@ public class UsersService {
 
     @RequestMapping(method = RequestMethod.GET, path = "/find-all", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> findall() {
+    ResponseEntity<List<GenericServiceBean>> findall() {
 
         GenericResponse response = new GenericResponse();
         try {
 //            log.debug(logPrefix + "-[FIND-ALL]");
-            List<User> list = userRepository.findAll();
-            response.setContent(transform.listEntityToListBean(list));
+
+            List<GenericServiceBean> bean = transform.listEntityToListBean(userRepository.findAll());
+
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
         } catch (Exception ex) {
 //            log.error(logPrefix + "-[HTTP STATUS][" + HttpStatus.INTERNAL_SERVER_ERROR + "]-[ERROR][" + ex.getMessage() + "]", ex);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 //        log.debug(logPrefix + "-[SUCESS]-[HTTP STATUS][200]");
-        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/create", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> create(@RequestParam(value = "name", required = true) String nameUser,
+    ResponseEntity<GenericServiceBean> create(@RequestParam(value = "name", required = true) String nameUser,
             @RequestParam(value = "email", required = true) String email,
             @RequestParam(value = "password", required = true) String password,
             @RequestParam(value = "imgUser", required = false) String imgUser,
@@ -78,7 +81,7 @@ public class UsersService {
 
     @RequestMapping(method = RequestMethod.PUT, path = "/update", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> update(
+    ResponseEntity<GenericServiceBean> update(
             @RequestParam(value = "idUser", required = true) Integer idUser,
             @RequestParam(value = "name", required = true) String nameUser,
             @RequestParam(value = "email", required = true) String email,
@@ -113,7 +116,7 @@ public class UsersService {
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/delete", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> delete(
+    ResponseEntity<GenericServiceBean> delete(
             @RequestParam(value = "idUser", required = true) Integer idUser
     ) {
 

@@ -8,6 +8,7 @@ package com.mycompany.mavenproject1.services.events;
 import com.mycompany.mavenproject1.integrations.model.Event;
 import com.mycompany.mavenproject1.integrations.repository.EventRepository;
 import com.mycompany.mavenproject1.services.common.GenericResponse;
+import com.mycompany.mavenproject1.services.common.GenericServiceBean;
 import com.mycompany.mavenproject1.services.events.transform.EventsTransform;
 import java.util.Date;
 import java.util.List;
@@ -40,24 +41,24 @@ public class EventsService {
 
     @RequestMapping(method = RequestMethod.GET, path = "/find-all", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> findall() {
+    ResponseEntity<List<GenericServiceBean>> findall() {
 
-        GenericResponse response = new GenericResponse();
+//        GenericResponse response = new GenericResponse();
         try {
             log.info("-[FIND-ALL]");
-            List<Event> list = eventRepository.findAll();
-            response.setContent(transform.listEntityToListBean(list));
+            List<GenericServiceBean> bean = transform.listEntityToListBean(eventRepository.findAll());
+
+            log.info("-[SUCESS]-[HTTP STATUS][200]");
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
         } catch (Exception ex) {
             log.log(Level.FINEST, "-[HTTP STATUS][{0}]-[ERROR][{1}]", new Object[]{HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()});
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-        log.info("-[SUCESS]-[HTTP STATUS][200]");
-        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/create", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> create(@RequestParam(value = "nameEvent", required = true) String nameEvent,
+    ResponseEntity<GenericServiceBean> create(@RequestParam(value = "nameEvent", required = true) String nameEvent,
             @RequestParam(value = "description", required = true) String description,
             @RequestParam(value = "dateEvent", required = true) Date dateEvent,
             @RequestParam(value = "imgEvent", required = false) String imgEvent) {
@@ -82,7 +83,7 @@ public class EventsService {
 
     @RequestMapping(method = RequestMethod.PUT, path = "/update", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> update(
+    ResponseEntity<GenericServiceBean> update(
             @RequestParam(value = "idEvent", required = true) Integer idEvent,
             @RequestParam(value = "nameEvent", required = false) String nameEvent,
             @RequestParam(value = "description", required = false) String description,
@@ -119,7 +120,7 @@ public class EventsService {
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/delete", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<GenericResponse> delete(
+    ResponseEntity<GenericServiceBean> delete(
             @RequestParam(value = "idEvent", required = true) Integer idEvent
     ) {
 

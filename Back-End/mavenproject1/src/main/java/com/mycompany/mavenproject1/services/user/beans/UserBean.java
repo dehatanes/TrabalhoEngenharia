@@ -6,18 +6,20 @@
 package com.mycompany.mavenproject1.services.user.beans;
 
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
+import java.util.List;
 
 /**
  *
  * @author danie
  */
-public class UserBean extends GenericServiceBean{
+public class UserBean extends GenericServiceBean {
 
     private Integer id;
     private String name;
     private String email;
     private String image;
     private String profile;
+    private List<GenericServiceBean> events;
 
     public UserBean() {
     }
@@ -60,6 +62,14 @@ public class UserBean extends GenericServiceBean{
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    public List<GenericServiceBean> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<GenericServiceBean> events) {
+        this.events = events;
     }
 
 }

@@ -7,9 +7,11 @@ package com.mycompany.mavenproject1.services.user.transform;
 
 import com.mycompany.mavenproject1.integrations.model.User;
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
+import com.mycompany.mavenproject1.services.events.transform.EventsTransform;
 import com.mycompany.mavenproject1.services.user.beans.UserBean;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,6 +21,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserTransform {
 
+    @Autowired
+    EventsTransform eventsTransform;
+
     public GenericServiceBean entityToBean(User user) {
         UserBean bean = new UserBean();
         bean.setId(user.getIdUser());
@@ -27,6 +32,9 @@ public class UserTransform {
         bean.setProfile(user.getUserProfile());
         if (user.getImageUser() != null && user.getImageUser().trim().length() > 0) {
             bean.setImage(user.getImageUser());
+        }
+        if (user.getEventList() != null) {
+            bean.setEvents(eventsTransform.listEntityToListBean(user.getEventList()));
         }
         return bean;
     }

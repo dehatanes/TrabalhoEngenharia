@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="com.mycompany_mavenproject1_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.mycompany.mavenproject1.integrations.model.UserEvent</class>
+        <class>com.mycompany.mavenproject1.integrations.model.User</class>
+        <class>com.mycompany.mavenproject1.integrations.model.Event</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://lbd2017.database.windows.net:1433;databaseName=MakeParty;database=MakeParty;user=camu_izidoro@lbd2017"/>
+            <property name="javax.persistence.jdbc.user" value="camu_izidoro@lbd2017"/>
+            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="javax.persistence.jdbc.password" value="Teste12345"/>
+            <property name="dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
+
+        </properties>
+    </persistence-unit>
+</persistence>

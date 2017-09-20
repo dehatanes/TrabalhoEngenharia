@@ -1,0 +1,9 @@
+com\mycompany\mavenproject1\integrations\model\UserEvent.class
+com\mycompany\mavenproject1\integrations\model\UserEventPK.class
+com\mycompany\mavenproject1\integrations\repository\EventRepository.class
+com\mycompany\mavenproject1\Application.class
+com\mycompany\mavenproject1\integrations\model\User.class
+com\mycompany\mavenproject1\integrations\repository\UserRepository.class
+com\mycompany\mavenproject1\integrations\repository\UserEventRepository.class
+com\mycompany\mavenproject1\services\events\EventsService.class
+com\mycompany\mavenproject1\integrations\model\Event.class

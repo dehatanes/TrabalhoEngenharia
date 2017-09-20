@@ -49,6 +49,7 @@ body {
   height: 100%;
   left: 0;
   background-color: #667380;
+  background-image: url('https://simplesnapbacks.files.wordpress.com/2014/03/abstract-purple-background-wallpaper-hd.jpg');
   overflow-x: hidden;
   overflow-y: auto; }
 
@@ -62,9 +63,9 @@ body {
           transform: translateY(-50%) translateX(-50%); }
   .auth-container .auth-header {
     text-align: center;
-    border-bottom: 1px solid #7867A7; }
+    border-bottom: 3px solid #7867A7; }
   .auth-container .auth-title {
-    color: #97A4B1;
+    color: #7867A6;
     padding: 20px;
     line-height: 30px;
     font-size: 26px;
@@ -514,7 +515,7 @@ body {
   -webkit-box-shadow: 1px 1px 5px rgba(126, 142, 159, 0.1);
           box-shadow: 1px 1px 5px rgba(126, 142, 159, 0.1);
   margin-bottom: 10px;
-  border-radius: 0;
+  border-radius: 10px;
   border: none; }
   .card .card {
     -webkit-box-shadow: none;

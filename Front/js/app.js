@@ -52,23 +52,23 @@ config.chart.colorSecondary = tinycolor($ref.find(".chart .color-secondary").css
 
 //LoginForm validation
 // Função de Login da Debs
-$(document).ready(function(){
-    if (!$('#login-form').length) {
-        return false;
-    }
-    $("#login").click(function(){
-        var usuario = $("#username").val();
-        var senha = $("#password").val();
-        $.post( "http://localhost:9000/login/login?", {
-            username: usuario, password: senha })
-            .done(function( data ) {
-                alert( "Data Loaded: " + data );
-        })
-            .fail(function() {
-                alert( "Erro tentando acessar o banco" );
-        })
-    });
-});
+//$(document).ready(function(){
+//    if (!$('#login-form').length) {
+//        return false;
+//    }
+//    $("#login").click(function(){
+//        var usuario = $("#username").val();
+//        var senha = $("#password").val();
+//        $.post( "http://localhost:9000/login/login?", {
+//            username: usuario, password: senha })
+//            .done(function( data ) {
+//                alert( "Data Loaded: " + data );
+//        })
+//            .fail(function() {
+//                alert( "Erro tentando acessar o banco" );
+//        })
+//    });
+//});
 
 
 $(function() {

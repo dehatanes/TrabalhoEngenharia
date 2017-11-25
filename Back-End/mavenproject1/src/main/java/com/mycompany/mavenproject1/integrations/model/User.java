@@ -8,6 +8,7 @@ package com.mycompany.mavenproject1.integrations.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +27,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MP_USER")
 public class User implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<UserEvent> userEventList;
 
     @JoinTable(name = "MP_USER_EVENT", joinColumns = {
         @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")}, inverseJoinColumns = {
@@ -145,6 +150,14 @@ public class User implements Serializable {
 
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
+    }
+
+    public List<UserEvent> getUserEventList() {
+        return userEventList;
+    }
+
+    public void setUserEventList(List<UserEvent> userEventList) {
+        this.userEventList = userEventList;
     }
 
 }

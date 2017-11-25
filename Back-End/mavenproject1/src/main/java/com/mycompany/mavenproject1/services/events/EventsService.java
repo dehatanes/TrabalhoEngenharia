@@ -9,6 +9,7 @@ import com.mycompany.mavenproject1.integrations.model.Event;
 import com.mycompany.mavenproject1.integrations.repository.EventRepository;
 import com.mycompany.mavenproject1.services.common.GenericResponse;
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
+import com.mycompany.mavenproject1.services.events.beans.EventsBean;
 import com.mycompany.mavenproject1.services.events.transform.EventsTransform;
 import java.util.Date;
 import java.util.List;
@@ -137,4 +138,20 @@ public class EventsService {
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/find-by-id", produces = "application/json")
+        public @ResponseBody
+        ResponseEntity<GenericServiceBean> findOne(@RequestParam(value = "id", required = true) Integer id) {
+
+            try {
+    //            log.debug(logPrefix + "-[FIND-ALL]");
+
+                EventsBean bean = (EventsBean) transform.entityToBeanWithUsers(eventRepository.findOne(id));
+
+                return ResponseEntity.status(HttpStatus.OK).body(bean);
+            } catch (Exception ex) {
+    //            log.error(logPrefix + "-[HTTP STATUS][" + HttpStatus.INTERNAL_SERVER_ERROR + "]-[ERROR][" + ex.getMessage() + "]", ex);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
+    //        log.debug(logPrefix + "-[SUCESS]-[HTTP STATUS][200]");
+        }
 }

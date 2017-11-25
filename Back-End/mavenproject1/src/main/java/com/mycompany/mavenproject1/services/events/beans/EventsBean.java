@@ -7,6 +7,7 @@ package com.mycompany.mavenproject1.services.events.beans;
 
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -62,5 +63,15 @@ public class EventsBean extends GenericServiceBean {
     public void setDate(Date date) {
         this.date = date;
     }
+    private List<GenericServiceBean> users;
+
+   public List<GenericServiceBean> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<GenericServiceBean> users) {
+        this.users = users;
+    }
+    
 
 }

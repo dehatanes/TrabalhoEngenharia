@@ -18,7 +18,6 @@ public class UserBean extends GenericServiceBean {
     private String name;
     private String email;
     private String image;
-    private String profile;
     private List<GenericServiceBean> events;
 
     public UserBean() {
@@ -54,14 +53,6 @@ public class UserBean extends GenericServiceBean {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
     }
 
     public List<GenericServiceBean> getEvents() {

@@ -29,7 +29,6 @@ public class UserTransform {
         bean.setId(user.getIdUser());
         bean.setName(user.getNameUser());
         bean.setEmail(user.getEmailUser());
-        bean.setProfile(user.getUserProfile());
         if (user.getImageUser() != null && user.getImageUser().trim().length() > 0) {
             bean.setImage(user.getImageUser());
         }
@@ -44,6 +43,24 @@ public class UserTransform {
 
         for (User user : users) {
             beans.add(this.entityToBean(user));
+        }
+        return beans;
+    }
+    public GenericServiceBean entityToBeanWithoutEvent(User user) {
+        UserBean bean = new UserBean();
+        bean.setId(user.getIdUser());
+        bean.setName(user.getNameUser());
+        bean.setEmail(user.getEmailUser());
+        if (user.getImageUser() != null && user.getImageUser().trim().length() > 0) {
+            bean.setImage(user.getImageUser());
+        }
+        return bean;
+    }
+    public List<GenericServiceBean> listEntityToListBeanWithoutEvent(List<User> users) {
+        List<GenericServiceBean> beans = new ArrayList<>();
+
+        for (User user : users) {
+            beans.add(this.entityToBeanWithoutEvent(user));
         }
         return beans;
     }

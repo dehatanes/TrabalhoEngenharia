@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +18,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -30,6 +34,24 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e")})
 public class Event implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEvent")
+    private List<Lote> loteList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private List<UserEvent> userEventList;
+
+    @Size(max = 200)
+    @Column(name = "CAPACITY_EVENT")
+    private String capacityEvent;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "EVENT_PROFIT")
+    private int eventProfit;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEvent")
+    private List<Despesas> despesasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEvent")
+    private List<SalesHistory> salesHistoryList;
 
     @ManyToMany(mappedBy = "eventList")
     private List<User> userList;
@@ -138,6 +160,54 @@ public class Event implements Serializable {
 
     public void setUserList(List<User> userList) {
         this.userList = userList;
+    }
+
+    public String getCapacityEvent() {
+        return capacityEvent;
+    }
+
+    public void setCapacityEvent(String capacityEvent) {
+        this.capacityEvent = capacityEvent;
+    }
+
+    public int getEventProfit() {
+        return eventProfit;
+    }
+
+    public void setEventProfit(int eventProfit) {
+        this.eventProfit = eventProfit;
+    }
+
+    public List<Despesas> getDespesasList() {
+        return despesasList;
+    }
+
+    public void setDespesasList(List<Despesas> despesasList) {
+        this.despesasList = despesasList;
+    }
+
+    public List<SalesHistory> getSalesHistoryList() {
+        return salesHistoryList;
+    }
+
+    public void setSalesHistoryList(List<SalesHistory> salesHistoryList) {
+        this.salesHistoryList = salesHistoryList;
+    }
+
+    public List<UserEvent> getUserEventList() {
+        return userEventList;
+    }
+
+    public void setUserEventList(List<UserEvent> userEventList) {
+        this.userEventList = userEventList;
+    }
+
+    public List<Lote> getLoteList() {
+        return loteList;
+    }
+
+    public void setLoteList(List<Lote> loteList) {
+        this.loteList = loteList;
     }
 
 }

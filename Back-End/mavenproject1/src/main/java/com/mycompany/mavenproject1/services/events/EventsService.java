@@ -62,7 +62,10 @@ public class EventsService {
     ResponseEntity<GenericServiceBean> create(@RequestParam(value = "nameEvent", required = true) String nameEvent,
             @RequestParam(value = "description", required = true) String description,
             @RequestParam(value = "dateEvent", required = true) Date dateEvent,
-            @RequestParam(value = "imgEvent", required = false) String imgEvent) {
+            @RequestParam(value = "imgEvent", required = false) String imgEvent,
+            @RequestParam(value = "capacity", required = false) String capacity,
+            @RequestParam(value = "profit", required = false) Integer profit
+    ) {
 
         Event event = new Event();
         event.setNameEvent(nameEvent);
@@ -71,6 +74,8 @@ public class EventsService {
         if (imgEvent != null && !imgEvent.isEmpty()) {
             event.setImageEvent(imgEvent);
         }
+        event.setCapacityEvent(capacity);
+        event.setEventProfit(profit);
         try {
             eventRepository.save(event);
         } catch (Exception ex) {
@@ -89,7 +94,9 @@ public class EventsService {
             @RequestParam(value = "nameEvent", required = false) String nameEvent,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "dateEvent", required = false) Date dateEvent,
-            @RequestParam(value = "imgEvent", required = false) String imgEvent) {
+            @RequestParam(value = "imgEvent", required = false) String imgEvent,
+            @RequestParam(value = "capacity", required = false) String capacity,
+            @RequestParam(value = "profit", required = false) Integer profit) {
 
         Event event = eventRepository.findOne(idEvent);
         if (event == null) {
@@ -109,6 +116,13 @@ public class EventsService {
         if (imgEvent != null && !imgEvent.isEmpty()) {
             event.setImageEvent(imgEvent);
         }
+        if (capacity != null) {
+            event.setCapacityEvent(capacity);
+        }
+        if (profit != null) {
+            event.setEventProfit(profit);
+        }
+
         try {
             eventRepository.save(event);
         } catch (Exception ex) {
@@ -139,19 +153,19 @@ public class EventsService {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/find-by-id", produces = "application/json")
-        public @ResponseBody
-        ResponseEntity<GenericServiceBean> findOne(@RequestParam(value = "id", required = true) Integer id) {
+    public @ResponseBody
+    ResponseEntity<GenericServiceBean> findOne(@RequestParam(value = "id", required = true) Integer id) {
 
-            try {
-    //            log.debug(logPrefix + "-[FIND-ALL]");
+        try {
+            //            log.debug(logPrefix + "-[FIND-ALL]");
 
-                EventsBean bean = (EventsBean) transform.entityToBeanWithUsers(eventRepository.findOne(id));
+            EventsBean bean = (EventsBean) transform.entityToBeanWithUsers(eventRepository.findOne(id));
 
-                return ResponseEntity.status(HttpStatus.OK).body(bean);
-            } catch (Exception ex) {
-    //            log.error(logPrefix + "-[HTTP STATUS][" + HttpStatus.INTERNAL_SERVER_ERROR + "]-[ERROR][" + ex.getMessage() + "]", ex);
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-            }
-    //        log.debug(logPrefix + "-[SUCESS]-[HTTP STATUS][200]");
+            return ResponseEntity.status(HttpStatus.OK).body(bean);
+        } catch (Exception ex) {
+            //            log.error(logPrefix + "-[HTTP STATUS][" + HttpStatus.INTERNAL_SERVER_ERROR + "]-[ERROR][" + ex.getMessage() + "]", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
+        //        log.debug(logPrefix + "-[SUCESS]-[HTTP STATUS][200]");
+    }
 }

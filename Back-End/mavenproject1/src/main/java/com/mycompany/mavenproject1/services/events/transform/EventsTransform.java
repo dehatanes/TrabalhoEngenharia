@@ -20,7 +20,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class EventsTransform {
-    @Autowired UserTransform transform;
+
+    @Autowired
+    UserTransform transform;
 
     public GenericServiceBean entityToBean(Event event) {
         EventsBean bean = new EventsBean();
@@ -31,6 +33,8 @@ public class EventsTransform {
         if (event.getImageEvent() != null && event.getImageEvent().trim().length() > 0) {
             bean.setImage(event.getImageEvent());
         }
+        bean.setCapacity(Integer.parseInt(event.getCapacityEvent()));
+        bean.setProfit(event.getEventProfit());
         return bean;
     }
 
@@ -42,7 +46,7 @@ public class EventsTransform {
         }
         return beans;
     }
-    
+
     public GenericServiceBean entityToBeanWithUsers(Event event) {
         EventsBean bean = new EventsBean();
         bean.setId(event.getIdEvent());
@@ -55,6 +59,8 @@ public class EventsTransform {
         if (event.getUserList() != null) {
             bean.setUsers(transform.listEntityToListBeanWithoutEvent(event.getUserList()));
         }
+        bean.setCapacity(Integer.parseInt(event.getCapacityEvent()));
+        bean.setProfit(event.getEventProfit());
         return bean;
     }
 

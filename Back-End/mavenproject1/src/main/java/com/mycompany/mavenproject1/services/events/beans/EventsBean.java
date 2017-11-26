@@ -20,6 +20,8 @@ public class EventsBean extends GenericServiceBean {
     private String description;
     private String image;
     private Date date;
+    private Integer capacity;
+    private Integer profit;
 
     public EventsBean() {
     }
@@ -65,13 +67,28 @@ public class EventsBean extends GenericServiceBean {
     }
     private List<GenericServiceBean> users;
 
-   public List<GenericServiceBean> getUsers() {
+    public List<GenericServiceBean> getUsers() {
         return users;
     }
 
     public void setUsers(List<GenericServiceBean> users) {
         this.users = users;
     }
-    
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Integer getProfit() {
+        return profit;
+    }
+
+    public void setProfit(Integer profit) {
+        this.profit = profit;
+    }
 
 }

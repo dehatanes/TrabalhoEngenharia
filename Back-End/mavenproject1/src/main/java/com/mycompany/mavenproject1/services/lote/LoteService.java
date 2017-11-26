@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Daniel
  */
 @Controller
+
 @RequestMapping("/lote")
 public class LoteService {
 

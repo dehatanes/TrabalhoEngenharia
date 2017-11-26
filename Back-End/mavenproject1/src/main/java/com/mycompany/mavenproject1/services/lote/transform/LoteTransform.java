@@ -11,11 +11,13 @@ import com.mycompany.mavenproject1.services.common.GenericTransform;
 import com.mycompany.mavenproject1.services.lote.bean.LoteBean;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Daniel
  */
+@Component
 public class LoteTransform extends GenericTransform<Lote> {
 
     public GenericServiceBean entityToBean(Lote lote) {

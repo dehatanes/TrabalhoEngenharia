@@ -11,11 +11,13 @@ import com.mycompany.mavenproject1.services.common.GenericTransform;
 import com.mycompany.mavenproject1.services.saleshistory.bean.SalesHistoryBean;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Daniel
  */
+@Component
 public class SalesHistoryTransform extends GenericTransform<SalesHistory> {
     
     public GenericServiceBean entityToBean(SalesHistory salesHistory) {

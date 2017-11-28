@@ -1,0 +1,425 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> MakeParty - Organize suas festas </title>
+    <meta name="description" content="Organize suas festas de forma muito mais prática. Tenha controle de suas vendas, orçamentos e cotações em poucos cliques.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/app-purple.css">
+    <!-- Theme initialization -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <!-- INÍCIO HEADER -->
+            <header class="header">
+                <div class="header-block header-block-collapse d-lg-none d-xl-none">
+                    <button class="collapse-btn" id="sidebar-collapse-btn">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="header-block header-block-nav">
+                    <ul class="nav-profile">
+                        <li class="profile dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="img" style="background-image: url('https://cdn2.iconfinder.com/data/icons/flat-avatars-1/512/Jerry-512.png')"> </div>
+                                <span class="name" id="submittername"> </span>
+                            </a>
+                            <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user icon"></i> Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-gear icon"></i> Preferências
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="login.html">
+                                    <i class="fa fa-power-off icon"></i> Sair
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <!-- FIM HEADER -->
+            <!-- INÍCIO SIDEBAR -->
+            <aside class="sidebar">
+                <div class="sidebar-container">
+                    <div class="sidebar-header">
+                        <div class="brand">
+                            <div class="logo">
+                                <span class="l l1"></span>
+                                <span class="l l2"></span>
+                                <span class="l l3"></span>
+                                <span class="l l4"></span>
+                                <span class="l l5"></span>
+                            </div> MakeParty
+                        </div>
+                    </div>
+                    <nav class="menu">
+                        <ul class="sidebar-menu metismenu" id="sidebar-menu">
+                            <li class="active">
+                                <a href="index.html">
+                                    <i class="fa fa-tag"></i> Minhas Festas
+                                </a>
+                            </li>
+                            <li>
+                                <a href="cadastro_evento.html">
+                                    <i class="fa fa-calendar"></i> Cadastrar Evento
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+            <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
+            <div class="mobile-menu-handle"></div>
+            <!-- FIM SIDEBAR -->
+
+            <article class="content item-editor-page">
+                <div class="title-block">
+                    <h3 class="title">
+                        Orçamento
+                        <span class="sparkline bar" data-type="bar"></span>
+                    </h3>
+                </div>
+                <form name="item" action="localhost:8080/cria_evento.jr" id="cria_evento">
+                    <div class="card card-block">
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label text-xs-right">Nome do Item </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control boxed" placeholder="" name="nome_item">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label text-xs-right"> Descrição do Item </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control boxed" placeholder="" name="desc_item">
+                            </div>
+                        </div>
+
+                 
+
+                        <div class="form-group row">
+
+                            <label class="col-sm-2 form-control-label text-xs-right">Quantidade: </label>
+                            <div class="col-sm-2">
+                                <input class="form-control boxed" placeholder="" type="number" name="qtd_item" id="qtd_item">
+                            </div>
+
+
+                            <label class="col-sm-2 form-control-label text-xs-right">Valor Unitário: </label>
+                            <div class="col-sm-2">
+                                <input class="form-control boxed" placeholder="" type="text" name="val_item" id="val_item">
+                            </div>
+
+                            <div class="form-group row" style="margin-left:10px">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <button type="submit" class="btn btn-primary" value="Salvar"> Salvar </button>
+                                </div>
+                            </div>
+                           
+
+                        </div>
+                 
+
+                        <section class="section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <div class="header-block">
+                                                <h3 class="title"> Orçamentos Salvos  </h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-block">
+                                    
+
+                                            <section class="example">
+                                                <div class="table-flip-scroll">
+                                                    <table class="table table-striped table-bordered table-hover flip-content" id="myTable">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Nome do Item</td>
+                                                                <td>Descrição do Item</td>
+                                                                <td>Quantidade</td>
+                                                                <td>Valor Unitário</td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="card-footer"> </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+
+                   
+                    </div>
+                </form>
+            </article>
+
+
+            <!-- INICIO FOOTER -->
+            <footer class="footer">
+                <div class="footer-block author">
+                    <ul>
+                        <li>
+                            created with <i class="fa fa-heart"></i> by
+                            <a href="#">Debs</a>
+                        </li>
+                        <li>
+                            <a href="#">Camu</a>
+                        </li>
+                        <li>
+                            <a href="#">Rezina</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+            <!-- FIM FOOTER -->
+            <div class="modal fade" id="modal-media">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Fechar</span>
+                            </button>
+                        </div>
+                        <div class="modal-body modal-tab-container">
+                            <ul class="nav nav-tabs modal-tabs" role="tablist">
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#upload" data-toggle="tab" role="tab">Inserir</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content modal-tabz-content">
+                                <div class="tab-pane fade" id="gallery" role="tabpanel">
+                                    <div class="images-container">
+                                        <div class="row"> </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active in" id="upload" role="tabpanel">
+                                    <div class="upload-container">
+                                        <div id="dropzone">
+                                            <form action="/" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                                <div class="dz-message-block">
+                                                    <div class="dz-message needsclick"> Drop files here or click to upload. </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Insert Selected</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <div class="modal fade" id="confirm-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                <i class="fa fa-warning"></i> Alert
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure want to do this?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        </div>
+    </div>
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+    <script src="js/vendor.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        var lotes = 0;
+        var id_evento;
+        $(document).ready(function () {
+            $("#submittername").text(sessionStorage.getItem("usuario"));
+             id_evento = sessionStorage.getItem('id_evento');
+        });
+
+  
+
+ 
+
+
+
+        $("#cria_evento").submit(function (event) {
+            event.preventDefault();
+            var $form = $(this),
+                desc_item = $form.find("input[name='nome_evento']").val(),
+                nome_item = $form.find("input[name='link_evento']").val(),
+                qtd_item = $form.find("input[name='data_evento']").val(),
+                val_item = $form.find("input[name='url_img_evento']").val(),
+     
+                url = "http://localhost:9000/events/create"
+                url2 = "http://localhost:9000/events/set-user-event"
+                url3 = "http://localhost:9000/lote/create"
+                var id_evento = 0;
+
+
+                if (nome_evento == '' || link_evento == '' || data_evento == ' ' || url_img_evento == '' || cap_max == '' || custo == '') {
+                    alert("Preencha os campos!");
+                    return;
+                }
+
+                if (lotes == -1 || lotes == 0) {
+                    alert("Preencha a tabela de lotes !");
+                    return;
+                }
+
+                function post1() {
+
+                    var posting = $.post(url, {
+                        nameEvent: nome_evento,
+                        dateEvent: data_evento,
+                        imgEvent: url_img_evento,
+                        description: descricao_evento,
+                        capacity: cap_max,
+                        profit: custo
+                    });
+
+
+                    posting.done(function (data) {
+
+                        id_evento = data.id;
+                        post2();
+                    });
+
+                    posting.fail(function () {
+                        alert("Tente Novamente!");
+                        return;
+                    });
+                }
+
+              function  post2(){
+                  var posting2 = $.post(url2, {
+                      idEvent: id_evento,
+                      idUser: sessionStorage.getItem("id_usuario"),
+                      permission: '1'
+                  });
+
+
+                  posting2.done(function (data) {
+
+                      post3();
+                  });
+
+                  posting2.fail(function () {
+                      alert("Tente Novamente!");
+                      return;
+                  });
+
+                }
+
+
+
+              function post3() {
+                  var table = $("table tbody");
+                  var aux = 1;
+                  console.log("entra post");
+                  table.find('tr').each(function (i) {
+
+                      console.log("tabela");
+                      var $tds = $(this).find('td'),
+                          nome_lote = $tds.eq(0).text(),
+                          qtd_lote = $tds.eq(1).text(),
+                          val_ing = $tds.eq(2).text()
+
+                      if (qtd_lote != "Quantidade") {
+                          posting3 = $.post(url3, {
+                              nomeLote: nome_lote,
+                              qtdMaxIngressos: qtd_lote,
+                              idEvent: id_evento,
+                              valorIngresso: val_ing
+                          });
+                          posting3.done(function (data) {
+
+                              aux = 1;
+                          });
+                          posting3.fail(function () {
+                              alert("Tente Novamente!");
+                              aux = 2;
+                              return;
+
+                          });
+                      }
+
+
+
+
+                  });
+
+                  console.log(aux);
+                  if (aux == 1) {
+                      alert("Incluido com sucesso!");
+                      window.location.href = "index.html";
+                  } else {
+                      alert("Tente Novamente!");
+                  }
+
+              }
+
+                post1();
+
+
+
+
+
+
+        });
+
+
+
+    </script>
+</body>
+</html>
+
+

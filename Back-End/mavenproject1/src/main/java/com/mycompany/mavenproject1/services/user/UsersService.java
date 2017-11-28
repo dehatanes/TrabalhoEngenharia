@@ -5,10 +5,13 @@
  */
 package com.mycompany.mavenproject1.services.user;
 
+import com.mycompany.mavenproject1.integrations.model.Event;
 import com.mycompany.mavenproject1.integrations.model.User;
 import com.mycompany.mavenproject1.integrations.repository.UserRepository;
 import com.mycompany.mavenproject1.services.common.GenericResponse;
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
+import com.mycompany.mavenproject1.services.events.beans.EventsBean;
+import com.mycompany.mavenproject1.services.events.transform.EventsTransform;
 import com.mycompany.mavenproject1.services.user.beans.UserBean;
 import com.mycompany.mavenproject1.services.user.transform.UserTransform;
 import java.util.List;
@@ -34,6 +37,9 @@ public class UsersService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    EventsTransform eventsTransform;
 
     @RequestMapping(method = RequestMethod.GET, path = "/find-all", produces = "application/json")
     public @ResponseBody
@@ -66,7 +72,6 @@ public class UsersService {
         user.setNameUser(nameUser);
         user.setEmailUser(email);
         user.setUserPassword(password);
-        user.setUserProfile(profile);
         if (imgUser != null && !imgUser.isEmpty()) {
             user.setImageUser(imgUser);
         }
@@ -86,8 +91,7 @@ public class UsersService {
             @RequestParam(value = "name", required = true) String nameUser,
             @RequestParam(value = "email", required = true) String email,
             @RequestParam(value = "password", required = true) String password,
-            @RequestParam(value = "imgUser", required = false) String imgUser,
-            @RequestParam(value = "profile", required = true) String profile
+            @RequestParam(value = "imgUser", required = false) String imgUser
     ) {
         User user = userRepository.findOne(idUser);
         if (user == null) {
@@ -130,6 +134,23 @@ public class UsersService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/find-events-by-user", produces = "application/json")
+    public @ResponseBody
+    ResponseEntity<List<GenericServiceBean>> findOne(@RequestParam(value = "idUser", required = true) Integer idUser) {
+
+        GenericResponse response = new GenericResponse();
+        try {
+            User user = userRepository.findOne(idUser);
+            List<Event> list = user.getEventList();
+            
+            List<GenericServiceBean> listBean = eventsTransform.listEntityToListBean(list);
+
+            return ResponseEntity.status(HttpStatus.OK).body(listBean);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mycompany.mavenproject1.services.despesas.transform;
 
 import com.mycompany.mavenproject1.integrations.model.Despesas;
@@ -12,9 +11,7 @@ import com.mycompany.mavenproject1.services.common.GenericTransform;
 import com.mycompany.mavenproject1.services.despesas.bean.DespesaBean;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Component;
-
 
 /**
  *

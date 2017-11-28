@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
@@ -27,28 +27,20 @@
                     </header>
                     <div class="auth-content">
                         <p class="text-center">ENTRE AGORA E COMECE A FESTEJAR!</p>
-                        <form id="login-form" action="C:\Users\Robots\Desktop\TrabalhoEngenharia\Front\index.html" method="POST" novalidate="">
+                        <form  id="login_x" action="localhost:8080/login_x.jr">
                             <div class="form-group">
-                                <label for="username">Usuário</label>
-                                <input type="email" class="form-control underlined" name="username" id="username" placeholder="Seu endereço de e-mail" required> </div>
-                            <div class="form-group">
-                                <label for="password">Senha</label>
-                                <input type="password" class="form-control underlined" name="password" id="password" placeholder="Sua senha" required> </div>
-                            <div class="form-group">
-                                <label for="remember">
-                                    <input class="checkbox" id="remember" type="checkbox">
-                                    <span>Lembrar-me</span>
-                                </label>
-                                <a href="reset.html" class="forgot-btn pull-right">Esqueceu sua senha?</a>
+                                <label for="user">Usuário</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Seu endereço de e-mail" >
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-block btn-primary">Login</button>
+                                <label for="senha">Senha</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Sua senha" required>
                             </div>
+                        
                             <div class="form-group">
-                                <p class="text-muted text-center">Não possui uma conta?
-                                    <a href="signup.html">REGISTRE-SE!</a>
-                                </p>
+                                <button  class="btn btn-primary" type="submit" id="x">Login</button>
                             </div>
+                          
                         </form>
                     </div>
                 </div>
@@ -64,5 +56,40 @@
         </div>
         <script src="js/vendor.js"></script>
         <script src="js/app.js"></script>
+
+        <script>
+
+            $("#login_x").submit(function (event) {
+
+                
+                event.preventDefault();
+                var $form = $(this),
+                    email = $form.find("input[name='email']").val(),
+                    senha = $form.find("input[name='password']").val(),
+                    url = "http://localhost:9000/login/login"
+
+                var posting = $.post(url, {
+                    email: email,
+                    password: senha,
+                  
+                });
+
+                posting.done(function (data) {
+                    sessionStorage.removeItem("usuario")
+                    sessionStorage.removeItem("id_usuario")
+                    sessionStorage.setItem("usuario", data.name)
+                    sessionStorage.setItem("id_usuario", data.id)
+                   
+                   
+                    window.location.href = "index.html"
+                }); 
+
+                posting.fail(function (data) {
+                  alert("Os dados estão incorretos!")
+                }); 
+
+               
+            });
+        </script>
     </body>
 </html>

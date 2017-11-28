@@ -54,8 +54,7 @@ public class User implements Serializable {
     private String userPassword;
     @Column(name = "IMAGE_USER")
     private String imageUser;
-    @Column(name = "USER_PROFILE")
-    private String userProfile;
+
 
     public User() {
     }
@@ -109,14 +108,6 @@ public class User implements Serializable {
 
     public void setImageUser(String imageUser) {
         this.imageUser = imageUser;
-    }
-
-    public String getUserProfile() {
-        return userProfile;
-    }
-
-    public void setUserProfile(String userProfile) {
-        this.userProfile = userProfile;
     }
 
     @Override

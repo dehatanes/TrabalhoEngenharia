@@ -1,6 +1,8 @@
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\despesas\bean\DespesaBean.java
+C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\despesas\CalculaFinancas.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\lote\bean\LoteBean.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\events\EventsService.java
+C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\saleshistory\CalculaVendas.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\common\PageMetadata.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\saleshistory\transform\SalesHistoryTransform.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\common\GenericResponse.java
@@ -14,6 +16,7 @@ C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproje
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\common\GenericServiceBean.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\integrations\model\Event.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\integrations\repository\LoteRepository.java
+C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\utils\Utils.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\integrations\model\UserEvent.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\user\UsersService.java
 C:\Users\camil\OneDrive\Documentos\GitHub\TrabalhoEngenharia\Back-End\mavenproject1\src\main\java\com\mycompany\mavenproject1\services\events\transform\EventsTransform.java

@@ -33,7 +33,9 @@ public class EventsTransform {
         if (event.getImageEvent() != null && event.getImageEvent().trim().length() > 0) {
             bean.setImage(event.getImageEvent());
         }
-        bean.setCapacity(Integer.parseInt(event.getCapacityEvent()));
+        if (event.getCapacityEvent() != null && event.getCapacityEvent().trim().length() > 0) {
+            bean.setCapacity(Integer.parseInt(event.getCapacityEvent()));
+        }
         bean.setProfit(event.getEventProfit());
         return bean;
     }

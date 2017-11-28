@@ -8,9 +8,7 @@ package com.mycompany.mavenproject1.services.lote;
 import com.mycompany.mavenproject1.integrations.model.Lote;
 import com.mycompany.mavenproject1.integrations.model.Event;
 import com.mycompany.mavenproject1.integrations.repository.LoteRepository;
-import com.mycompany.mavenproject1.integrations.repository.LoteRepository;
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
-import com.mycompany.mavenproject1.services.lote.LoteService;
 import com.mycompany.mavenproject1.services.lote.bean.LoteBean;
 import com.mycompany.mavenproject1.services.lote.transform.LoteTransform;
 import java.util.List;
@@ -30,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Daniel
  */
 @Controller
-
 @RequestMapping("/lote")
 public class LoteService {
 
@@ -63,14 +60,13 @@ public class LoteService {
     ResponseEntity<GenericServiceBean> create(@RequestParam(value = "idEvent", required = true) Integer idEvent,
             @RequestParam(value = "nomeLote", required = true) String nomeLote,
             @RequestParam(value = "qtdMaxIngressos", required = true) Integer qtdMaxIngressos,
-            @RequestParam(value = "qtdIngressosVendidos", required = true) Integer qtdIngressosVendidos,
             @RequestParam(value = "valorIngresso", required = true) Integer valorIngresso
     ) {
         Event event = new Event(idEvent);
         Lote lote = new Lote();
         lote.setNomeLote(nomeLote);
         lote.setQtdMaxIngressos(qtdMaxIngressos);
-        lote.setQtdIngressosVendidos(qtdIngressosVendidos);
+        lote.setQtdIngressosVendidos(0);
         lote.setValorIngresso(valorIngresso);
         lote.setIdEvent(event);
         try {

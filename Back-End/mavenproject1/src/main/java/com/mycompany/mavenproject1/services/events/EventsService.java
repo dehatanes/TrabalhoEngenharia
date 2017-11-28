@@ -6,8 +6,12 @@
 package com.mycompany.mavenproject1.services.events;
 
 import com.mycompany.mavenproject1.integrations.model.Event;
+import com.mycompany.mavenproject1.integrations.model.User;
+import com.mycompany.mavenproject1.integrations.model.UserEvent;
+import com.mycompany.mavenproject1.integrations.model.UserEventPK;
 import com.mycompany.mavenproject1.integrations.repository.EventRepository;
-import com.mycompany.mavenproject1.services.common.GenericResponse;
+import com.mycompany.mavenproject1.integrations.repository.UserEventRepository;
+import com.mycompany.mavenproject1.integrations.repository.UserRepository;
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
 import com.mycompany.mavenproject1.services.events.beans.EventsBean;
 import com.mycompany.mavenproject1.services.events.transform.EventsTransform;
@@ -16,6 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -40,7 +45,14 @@ public class EventsService {
     @Autowired
     EventsTransform transform;
 
+    @Autowired
+    UserRepository repository;
+
+    @Autowired
+    UserEventRepository userEventRepository;
+
     @RequestMapping(method = RequestMethod.GET, path = "/find-all", produces = "application/json")
+
     public @ResponseBody
     ResponseEntity<List<GenericServiceBean>> findall() {
 
@@ -61,7 +73,7 @@ public class EventsService {
     public @ResponseBody
     ResponseEntity<GenericServiceBean> create(@RequestParam(value = "nameEvent", required = true) String nameEvent,
             @RequestParam(value = "description", required = true) String description,
-            @RequestParam(value = "dateEvent", required = true) Date dateEvent,
+            @RequestParam(value = "dateEvent", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateEvent,
             @RequestParam(value = "imgEvent", required = false) String imgEvent,
             @RequestParam(value = "capacity", required = false) String capacity,
             @RequestParam(value = "profit", required = false) Integer profit
@@ -78,22 +90,23 @@ public class EventsService {
         event.setEventProfit(profit);
         try {
             eventRepository.save(event);
+            EventsBean bean = (EventsBean) transform.entityToBean(event);
+            return ResponseEntity.status(HttpStatus.CREATED).body(bean);
         } catch (Exception ex) {
             System.out.println(ex);
             log.log(Level.FINEST, "-[HTTP STATUS][{0}]-[ERROR][{1}]", new Object[]{HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()});
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/update", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "/update", produces = "application/json")
     public @ResponseBody
     ResponseEntity<GenericServiceBean> update(
             @RequestParam(value = "idEvent", required = true) Integer idEvent,
             @RequestParam(value = "nameEvent", required = false) String nameEvent,
             @RequestParam(value = "description", required = false) String description,
-            @RequestParam(value = "dateEvent", required = false) Date dateEvent,
+            @RequestParam(value = "dateEvent", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateEvent,
             @RequestParam(value = "imgEvent", required = false) String imgEvent,
             @RequestParam(value = "capacity", required = false) String capacity,
             @RequestParam(value = "profit", required = false) Integer profit) {
@@ -162,6 +175,37 @@ public class EventsService {
             EventsBean bean = (EventsBean) transform.entityToBeanWithUsers(eventRepository.findOne(id));
 
             return ResponseEntity.status(HttpStatus.OK).body(bean);
+        } catch (Exception ex) {
+            //            log.error(logPrefix + "-[HTTP STATUS][" + HttpStatus.INTERNAL_SERVER_ERROR + "]-[ERROR][" + ex.getMessage() + "]", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+        //        log.debug(logPrefix + "-[SUCESS]-[HTTP STATUS][200]");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/set-user-event", produces = "application/json")
+    public @ResponseBody
+    ResponseEntity<GenericServiceBean> setUserEvent(@RequestParam(value = "idUser", required = true) Integer idUser,
+            @RequestParam(value = "idEvent", required = true) Integer idEvent,
+            @RequestParam(value = "permission", required = true) String userPermission
+    ) {
+
+        try {
+            //            log.debug(logPrefix + "-[FIND-ALL]");
+
+//            EventsBean bean = (EventsBean) transform.entityToBeanWithUsers(eventRepository.findOne(id));
+            Event event = eventRepository.findOne(idEvent);
+            User user = repository.findOne(idUser);
+
+            UserEvent userEvent = new UserEvent();
+            UserEventPK pk = new UserEventPK(idEvent, idUser);
+            userEvent.setEvent(event);
+            userEvent.setUser(user);
+            userEvent.setUserEventPK(pk);
+            userEvent.setUserPermission(userPermission);
+
+            userEventRepository.save(userEvent);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(null);
         } catch (Exception ex) {
             //            log.error(logPrefix + "-[HTTP STATUS][" + HttpStatus.INTERNAL_SERVER_ERROR + "]-[ERROR][" + ex.getMessage() + "]", ex);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

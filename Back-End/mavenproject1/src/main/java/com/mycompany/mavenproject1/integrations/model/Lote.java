@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,8 +29,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "MP_LOTE")
-@NamedQueries({
-    @NamedQuery(name = "Lote.findAll", query = "SELECT l FROM Lote l")})
 public class Lote implements Serializable {
 
     @JoinColumn(name = "ID_EVENT", referencedColumnName = "ID_EVENT")
@@ -37,8 +37,8 @@ public class Lote implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_LOTE")
     private Integer idLote;
 
@@ -47,10 +47,6 @@ public class Lote implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "NOME_LOTE")
     private String nomeLote;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "NUMERO_LOTE")
-    private int numeroLote;
     @Basic(optional = false)
     @NotNull
     @Column(name = "QTD_MAX_INGRESSOS")
@@ -71,10 +67,10 @@ public class Lote implements Serializable {
         this.idLote = idLote;
     }
 
-    public Lote(Integer idLote, String nomeLote, int numeroLote, int qtdMaxIngressos, int valorIngresso) {
+    public Lote(Integer idLote, String nomeLote, int qtdMaxIngressos, int valorIngresso) {
         this.idLote = idLote;
         this.nomeLote = nomeLote;
-        this.numeroLote = numeroLote;
+
         this.qtdMaxIngressos = qtdMaxIngressos;
         this.valorIngresso = valorIngresso;
     }
@@ -93,14 +89,6 @@ public class Lote implements Serializable {
 
     public void setNomeLote(String nomeLote) {
         this.nomeLote = nomeLote;
-    }
-
-    public int getNumeroLote() {
-        return numeroLote;
-    }
-
-    public void setNumeroLote(int numeroLote) {
-        this.numeroLote = numeroLote;
     }
 
     public int getQtdMaxIngressos() {

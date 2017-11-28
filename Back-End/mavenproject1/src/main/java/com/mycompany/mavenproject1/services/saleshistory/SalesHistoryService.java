@@ -8,6 +8,7 @@ package com.mycompany.mavenproject1.services.saleshistory;
 import com.mycompany.mavenproject1.integrations.model.Event;
 import com.mycompany.mavenproject1.integrations.model.Lote;
 import com.mycompany.mavenproject1.integrations.model.SalesHistory;
+import com.mycompany.mavenproject1.integrations.repository.LoteRepository;
 import com.mycompany.mavenproject1.integrations.repository.SalesHistoryRepository;
 import com.mycompany.mavenproject1.services.common.GenericServiceBean;
 import com.mycompany.mavenproject1.services.saleshistory.bean.SalesHistoryBean;
@@ -39,6 +40,9 @@ public class SalesHistoryService {
     SalesHistoryRepository salesHistoryRepository;
 
     @Autowired
+    LoteRepository loteRepository;
+
+    @Autowired
     SalesHistoryTransform transform;
 
     @RequestMapping(method = RequestMethod.GET, path = "/find-all", produces = "application/json")
@@ -65,14 +69,18 @@ public class SalesHistoryService {
             @RequestParam(value = "qtdSold", required = true) Integer qtdSold
     ) {
         Event event = new Event(idEvent);
-        Lote lote = new Lote(idLote);
+        Lote lote = loteRepository.findOne(idLote);
         SalesHistory salesHistory = new SalesHistory();
         salesHistory.setQtdSold(qtdSold);
         salesHistory.setSaleDate(saleDate);
         salesHistory.setIdEvent(event);
         salesHistory.setIdLote(lote);
+
         try {
             salesHistoryRepository.save(salesHistory);
+
+            lote.setQtdIngressosVendidos(lote.getQtdIngressosVendidos() + salesHistory.getQtdSold());
+            loteRepository.save(lote);
         } catch (Exception ex) {
             System.out.println(ex);
             log.log(Level.FINEST, "-[HTTP STATUS][{0}]-[ERROR][{1}]", new Object[]{HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()});

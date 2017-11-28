@@ -8,13 +8,16 @@ com\mycompany\mavenproject1\integrations\repository\DespesasRepository.class
 com\mycompany\mavenproject1\services\user\beans\UserBean.class
 com\mycompany\mavenproject1\services\user\UsersService.class
 com\mycompany\mavenproject1\services\common\PageMetadata.class
+com\mycompany\mavenproject1\utils\Utils.class
 com\mycompany\mavenproject1\services\events\beans\EventsBean.class
 com\mycompany\mavenproject1\integrations\model\Event.class
+com\mycompany\mavenproject1\services\saleshistory\CalculaVendas.class
 com\mycompany\mavenproject1\integrations\repository\SalesHistoryRepository.class
 com\mycompany\mavenproject1\services\saleshistory\bean\SalesHistoryBean.class
 com\mycompany\mavenproject1\integrations\repository\EventRepository.class
 com\mycompany\mavenproject1\integrations\model\Lote.class
 com\mycompany\mavenproject1\services\despesas\DespesasService.class
+com\mycompany\mavenproject1\services\despesas\CalculaFinancas.class
 com\mycompany\mavenproject1\integrations\repository\UserEventRepository.class
 com\mycompany\mavenproject1\services\events\EventsService.class
 com\mycompany\mavenproject1\services\common\GenericResponse.class

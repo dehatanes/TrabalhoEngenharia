@@ -86,7 +86,7 @@
 
         <article class="content charts-morris-page" style="    padding-top: 70px">
                 <div class="title-block">
-                    <h3 class="title"> Grafico Maroto </h3>
+                    <h3 class="title"> Grafico Ultil </h3>
                 </div>
                 <section class="section">
                     <div class="row">
@@ -94,7 +94,7 @@
                             <div class="card">
                                 <div class="card-block">
                                     <div class="card-title-block">
-                                        <h3 class="title"> Demonstrativo de fluxo de caixa </h3>
+                                        <h3 class="title"> Demonstrativo de Gastos e Ganhos </h3>
                                     </div>
                                     <section class="example">
                                         <div id="morris-donut-chart"></div>
@@ -212,9 +212,8 @@
 
         Morris.Donut({
             element: 'morris-donut-chart',
-            data: [{ label: "Download Sales", value: 12 },
-                { label: "In-Store Sales", value: 25 },
-                { label: "Mail-Order Sales", value: 20 } ],
+            data: [{ label: "Ingressos Vendidos", value: 12 },
+                { label: "Valor despesas", value: 25 }],
             resize: true,
             colors: [
                 tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),

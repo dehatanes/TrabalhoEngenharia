@@ -91,14 +91,14 @@
                         <span class="sparkline bar" data-type="bar"></span>
                     </h3>
                 </div>
-                <form name="item" action="localhost:8080/cria_evento.jr" id="cria_evento">
+                <form name="historico_vendas" action="localhost:8080/cria_evento.jr" id="historico_vendas">
                     <div class="card card-block">
                         
                          <div class="form-group row">
 
                                 <label class="col-sm-4 form-control-label text-xs-right">Quantidade de Ingressos Vendidos: </label>
                                 <div class="col-sm-2">
-                                    <input type="number" class="form-control boxed" placeholder="" name="nome_item">
+                                    <input type="number" class="form-control boxed" placeholder="" name="qtd_sold">
                                 </div>
                                  
                             <label class="col-sm-1 form-control-label text-xs-right">Lote: </label>
@@ -117,7 +117,7 @@
 
                             <label class="col-sm-2 form-control-label text-xs-right">Data da Venda: </label>
                             <div class="col-sm-4">
-                                <input class="form-control boxed" placeholder="" type="date" name="val_item" id="val_item">
+                                <input class="form-control boxed" placeholder="" type="date" name="sale_date" id="sale_date">
                             </div>
 
                             <div class="form-group row" style="margin-left:10px">
@@ -291,10 +291,9 @@
         $("#cria_evento").submit(function (event) {
             event.preventDefault();
             var $form = $(this),
-                desc_item = $form.find("input[name='nome_evento']").val(),
-                nome_item = $form.find("input[name='link_evento']").val(),
-                qtd_item = $form.find("input[name='data_evento']").val(),
-                val_item = $form.find("input[name='url_img_evento']").val(),
+                qtd_sold = $form.find("input[name='qtd_sold']").val(),
+                sale_date = $form.find("input[name='sale_date']").val(),
+                nome_lote = $form.find("option[selected]").val(),
      
                 url = "http://localhost:9000/events/create"
                 url2 = "http://localhost:9000/events/set-user-event"
@@ -302,25 +301,22 @@
                 var id_evento = 0;
 
 
-                if (nome_evento == '' || link_evento == '' || data_evento == ' ' || url_img_evento == '' || cap_max == '' || custo == '') {
+                if (qtd_sold == '' || sale_date == '' || nome_lote == 'Escolher Lote') {
                     alert("Preencha os campos!");
                     return;
                 }
 
                 if (lotes == -1 || lotes == 0) {
-                    alert("Preencha a tabela de lotes !");
+                    alert("Selecione um lote!!");
                     return;
                 }
 
                 function post1() {
 
                     var posting = $.post(url, {
-                        nameEvent: nome_evento,
-                        dateEvent: data_evento,
-                        imgEvent: url_img_evento,
-                        description: descricao_evento,
-                        capacity: cap_max,
-                        profit: custo
+                        qtd_sold: qtd_sold,
+                        sale_date: sale_date,
+                        nome_lote: nome_lote,
                     });
 
 
